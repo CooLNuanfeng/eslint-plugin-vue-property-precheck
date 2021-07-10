@@ -1,4 +1,4 @@
-{
+module.exports = {
   "extends": "eslint:recommended",
   "parser": "vue-eslint-parser",
   "parserOptions": {
@@ -9,5 +9,6 @@
           "impliedStrict": false,
           "jsx": false
       }
-  }
+  },
+  "plugins": [require('./index')]
 }

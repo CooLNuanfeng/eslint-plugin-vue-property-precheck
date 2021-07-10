@@ -19,7 +19,7 @@ module.exports = {
     return context.parserServices.defineTemplateBodyVisitor(
       // Event handlers for <script> or scripts. (optional)
       {
-        MemberExpression(node) {
+        Program(node) {
 
           console.log(node)
         }
