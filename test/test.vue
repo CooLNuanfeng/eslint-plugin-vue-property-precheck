@@ -11,7 +11,7 @@ export default {
     }
   },
   mounted () {
-    this.name = arr[0].name
+    this.name = arr[0].name.age
   }
 }
 </script>
