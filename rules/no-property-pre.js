@@ -16,14 +16,19 @@ module.exports = {
   },
 
   create: function(context) {
-    return context.parserServices.defineTemplateBodyVisitor(
-      // Event handlers for <script> or scripts. (optional)
-      {
-        Program(node) {
+    return {
+      'MemberExpression MemberExpression': (node) => {
+        console.log(node)
+       },
+    }
+    // return context.parserServices.defineTemplateBodyVisitor(
+    //   // Event handlers for <script> or scripts. (optional)
+    //   {
+    //     Program(node) {
 
-          console.log(node)
-        }
-      }
-    )
+    //       console.log(node)
+    //     }
+    //   }
+    // )
   }
 };

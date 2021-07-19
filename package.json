@@ -4,7 +4,7 @@
   "description": "vue eslint plugin before using object properties, verify that the object exists",
   "main": "index.js",
   "scripts": {
-    "test": "npx eslint test --ext .vue"
+    "test": "eslint --ext .js,.vue test"
   },
   "repository": {
     "type": "git",
@@ -17,14 +17,15 @@
   },
   "homepage": "https://github.com/CooLNuanfeng/eslint-plugin-vue-property-precheck#readme",
   "peerDependencies": {
-    "babel-eslint": "*",
-    "eslint": "^6.0.0 || ^7.0.0",
-    "vue-eslint-parser": "^7.1.0"
+    "eslint": "^7.1.0",
+    "eslint-plugin-vue": "^6.2.2",
+    "babel-eslint": "^10.1.0"
   },
   "devDependencies": {
-    "babel-eslint": "^10.1.0",
-    "eslint": "^7.2.0",
-    "jest": "^26.0.1",
-    "vue-eslint-parser": "^7.1.0"
-  }
+    "eslint": "^7.1.0",
+    "mocha": "^7.2.0",
+    "eslint-plugin-vue": "^6.2.2",
+    "babel-eslint": "^10.1.0"
+  },
+  "dependencies": {}
 }
