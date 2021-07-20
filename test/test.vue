@@ -11,7 +11,10 @@ export default {
     }
   },
   mounted () {
-    this.name = arr[0].name.age
+    let obj = {}
+    // this.name = this.name && arr[0].name && arr[0].name.age
+    this.name =  obj.name.age
+    arr[0] = obj.name.age
   }
 }
 </script>
