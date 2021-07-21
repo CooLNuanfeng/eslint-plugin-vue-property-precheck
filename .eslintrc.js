@@ -21,7 +21,6 @@ module.exports = {
   ], 
   plugins: ['vue','vue-property-precheck'],
   rules: {
-    // 'property/no-property-pre': 'warn',
     'vue/max-attributes-per-line': 'off',
     'vue/html-self-closing': 'off',
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'warn',
