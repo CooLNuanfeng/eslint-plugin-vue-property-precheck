@@ -1,4 +1,5 @@
 const expressionMap = [
+  'VariableDeclarator',
   'BinaryExpression',
   'ConditionalExpression',
   'IfStatement',

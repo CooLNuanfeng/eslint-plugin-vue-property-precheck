@@ -56,8 +56,9 @@ log:
    7:48  warning  Get object properties, Make sure item.id exists      vue-property-precheck/no-property-pre
    8:10  warning  Get object properties, Make sure item.abc exists     vue-property-precheck/no-property-pre
   29:24  warning  Get object properties, Make sure arr[0] exists       vue-property-precheck/no-property-pre
-  32:19  warning  Get object properties, Make sure obj.name exists     vue-property-precheck/no-property-pre
-  34:20  warning  Get object properties, Make sure obj.address exists  vue-property-precheck/no-property-pre
-  35:8   warning  Get object properties, Make sure obj.aaa.bbb exists  vue-property-precheck/no-property-pre
-  38:32  warning  Get object properties, Make sure other.list exists   vue-property-precheck/no-property-pre
+  32:17  warning  Get object properties, Make sure obj.name exists     vue-property-precheck/no-property-pre
+  33:7   warning  Unexpected console statement                         no-console
+  35:20  warning  Get object properties, Make sure obj.address exists  vue-property-precheck/no-property-pre
+  36:8   warning  Get object properties, Make sure obj.aaa.bbb exists  vue-property-precheck/no-property-pre
+  39:32  warning  Get object properties, Make sure other.list exists   vue-property-precheck/no-property-pre
 ```

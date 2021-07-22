@@ -29,7 +29,8 @@ export default {
     this.name = stu || arr[0].name || arr[0].name.age
     this.name =  obj.age && obj.name
     if(this.$route.query.id){
-      this.name = obj.name.age
+      let abc = obj.name.age
+      console.log(abc)
     }
     obj.name.age = obj.address.name
     if(obj.aaa.bbb.ccc){
