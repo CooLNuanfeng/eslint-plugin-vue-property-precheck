@@ -8,6 +8,8 @@
 
 #### 使用
 
+npm i eslint-plugin-vue-property-precheck -D
+
 .eslintrc.js 配置示例
 
 ```
@@ -44,7 +46,7 @@ module.exports = {
 
 ### 测试
 
-npm i && npm run test
+npm i && npm link && npm link eslint-plugin-vue-property-precheck && npm run test
 
 log:
 

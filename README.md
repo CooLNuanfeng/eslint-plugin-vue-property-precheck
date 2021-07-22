@@ -8,6 +8,8 @@ In the Vue project, when the multi-layer properties of the object are used in th
 
 #### Usage
 
+npm i eslint-plugin-vue-property-precheck -D
+
 .eslintrc.js config example
 
 ```
@@ -44,7 +46,7 @@ module.exports = {
 
 ### test
 
-npm i && npm run test
+npm i && npm link && npm link eslint-plugin-vue-property-precheck && npm run test
 
 log:
 
