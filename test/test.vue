@@ -1,8 +1,10 @@
 <template>
   <div>
-    <p>{{ person.name && person.name.address }}</p>
-    <div v-if="products[0].name"></div>
-    <div v-for="item in list[0]" :key="item.id">
+    <p :class="{'active': list[0]}">
+      {{ person.name.address }}
+    </p>
+    <div v-if="hasdownload && $route.meta.hasdownload && !isUplus && obj.name.age"></div> 
+    <div v-for="item in list[0].product" :key="item.id.aaa">
       {{ item.abc.ccc }}
     </div>
   </div>
@@ -23,12 +25,15 @@ export default {
   mounted () {
     let obj = {}
     let other = {}
-    this.name = this.name && arr[0].name && arr[0].name.age
-    this.name =  obj.age.cc && obj.name.age
-    arr[0] = obj['name']
+    let stu = false
+    this.name = stu || arr[0].name || arr[0].name.age
+    this.name =  obj.age && obj.name
+    if(this.$route.query.id){
+      this.name = obj.name.age
+    }
     obj.name.age = obj.address.name
     if(obj.aaa.bbb.ccc){
-      console.log('aaaa')
+      arr[0] = obj['name']
     }
     flag.status ? other.name : other.list.product
 
