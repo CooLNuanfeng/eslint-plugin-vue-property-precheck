@@ -8,16 +8,15 @@ const expressionMap = [
   'UnaryExpression',
 ]
 
+const vueProperty = ['$route','$store']
 
 const reportMsgByNode = function(node, context){
-  let sourceCode = context.getSourceCode(node)
   // console.log('111')
+  let sourceCode = context.getSourceCode(node)
   if(node.parent.type === 'LogicalExpression' && node.type === 'MemberExpression'){
-    let sourceCode = context.getSourceCode(node)
     let parStr = sourceCode.getText(node.parent).replace(/\s+/g,'');
     let childStr = sourceCode.getText(node.object);
     let parentStrArr = parStr.split(node.parent.operator);
-    // console.log('ddd')
     if(!parentStrArr.includes(childStr) && node.object.type !== 'Identifier'){
       context.report({
         node,
@@ -28,37 +27,12 @@ const reportMsgByNode = function(node, context){
       });
     }
   }else if(node.type === 'MemberExpression' && node.object.type !== 'Identifier'){
-    context.report({
-      node,
-      messageId: 'avoidMethod',
-      data: {
-        name: `${sourceCode.getText(node.object)}`
-      },
-    });
-  }
-  // else if(node.object && node.object.type === 'MemberExpression'){
-  //   context.report({
-  //     node,
-  //     messageId: 'avoidMethod',
-  //     data: {
-  //       name: `${sourceCode.getText(node.object.object)}`
-  //     },
-  //   });
-  // } 
-    
-}
-
-const traverseNode = function(node, context){
-  // console.log('2222')
-  if(node.object && node.object.type !== 'ThisExpression'){
-    if(node.parent && node.parent.type === 'AssignmentExpression' && node.parent.right === node){
-      reportMsgByNode(node, context)
-    }else if(node.parent && node.parent.type === 'LogicalExpression'){
-      let sourceCode = context.getSourceCode(node)
-      let parStr = sourceCode.getText(node.parent).replace(/\s+/g,'');
-      let childStr = sourceCode.getText(node.object);
-      let parentStrArr = parStr.split(node.parent.operator);
-      if(!parentStrArr.includes(childStr) && node.object.type !== 'Identifier'){
+    let nodeText = sourceCode.getText(node);
+    if(nodeText.indexOf('this') !== -1){
+      if(node.object.object && node.object.object.property && vueProperty.includes(node.object.object.property.name)){
+        return
+      }
+      if(node.object.type === 'MemberExpression'){
         context.report({
           node,
           messageId: 'avoidMethod',
@@ -67,9 +41,44 @@ const traverseNode = function(node, context){
           },
         });
       }
-    }else if(expressionMap.includes(node.parent && node.parent.type)){
-      reportMsgByNode(node, context) 
+    }else{
+      context.report({
+        node,
+        messageId: 'avoidMethod',
+        data: {
+          name: `${sourceCode.getText(node.object)}`
+        },
+      });
     }
+  }
+    
+}
+
+const traverseNode = function(node, context){
+  // console.log('2222')
+  if(node.parent && node.parent.type === 'AssignmentExpression'){
+    if(node.parent.left.type === 'MemberExpression'){
+      reportMsgByNode(node, context)
+    }else if(node.parent.right === node){
+      reportMsgByNode(node, context)
+    }
+    
+  }else if(node.parent && node.parent.type === 'LogicalExpression'){
+    let sourceCode = context.getSourceCode(node)
+    let parStr = sourceCode.getText(node.parent).replace(/\s+/g,'');
+    let childStr = sourceCode.getText(node.object);
+    let parentStrArr = parStr.split(node.parent.operator);
+    if(!parentStrArr.includes(childStr) && node.object.type !== 'Identifier'){
+      context.report({
+        node,
+        messageId: 'avoidMethod',
+        data: {
+          name: `${sourceCode.getText(node.object)}`
+        },
+      });
+    }
+  }else if(expressionMap.includes(node.parent && node.parent.type)){
+    reportMsgByNode(node, context) 
   }
 }
 
@@ -87,7 +96,6 @@ const traverseTemplateNode = function(node,context){
     }
   }else if(node.type === 'ObjectExpression'){
     node.properties.forEach(itemNode=>{
-      // console.log('aaa')
       if(itemNode.value.type === 'LogicalExpression'){
         traverseTemplateNode(itemNode.value, context)
       }else{
@@ -97,9 +105,7 @@ const traverseTemplateNode = function(node,context){
   }else if(node.type === 'VForExpression'){
     reportMsgByNode(node.right, context)
   }
-  // else if(node.right){
-  //   traverseNode(node.right, context)
-  // }
+
 }
 
 
@@ -132,11 +138,7 @@ module.exports = {
       // Event handlers for <script> or scripts. (optional)
       {
         'MemberExpression': (node) => {
-          let sourceCode = context.getSourceCode(node)
-          let nodeStr = sourceCode.getText(node)
-          if(!nodeStr.includes('this')){
-            traverseNode(node, context)
-          }
+          traverseNode(node, context)
         },
       },
       // Options. (optional)

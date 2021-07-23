@@ -27,12 +27,16 @@ export default {
     let other = {}
     let stu = false
     this.name = stu || arr[0].name || arr[0].name.age
-    this.name =  obj.age && obj.name
-    if(this.$route.query.id){
+    this.name.www =  obj.age && obj.name
+    if(this.$route.query.person){
       let abc = obj.name.age
       console.log(abc)
     }
-    obj.name.age = obj.address.name
+    if(this.$route.query.person.id){
+      arr[0] = obj['name']
+    }
+    obj.name.age = obj.address.list
+
     if(obj.aaa.bbb.ccc){
       arr[0] = obj['name']
     }

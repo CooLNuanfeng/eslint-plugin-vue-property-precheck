@@ -51,16 +51,19 @@ npm i && npm link && npm link eslint-plugin-vue-property-precheck && npm run tes
 log:
 
 ```
-   4:10  warning  Get object properties, Make sure person.name exists  vue-property-precheck/no-property-pre
-   6:31  warning  Get object properties, Make sure $route.meta exists  vue-property-precheck/no-property-pre
-   6:70  warning  Get object properties, Make sure obj.name exists     vue-property-precheck/no-property-pre
-   7:25  warning  Get object properties, Make sure list[0] exists      vue-property-precheck/no-property-pre
-   7:48  warning  Get object properties, Make sure item.id exists      vue-property-precheck/no-property-pre
-   8:10  warning  Get object properties, Make sure item.abc exists     vue-property-precheck/no-property-pre
-  29:24  warning  Get object properties, Make sure arr[0] exists       vue-property-precheck/no-property-pre
-  32:17  warning  Get object properties, Make sure obj.name exists     vue-property-precheck/no-property-pre
-  33:7   warning  Unexpected console statement                         no-console
-  35:20  warning  Get object properties, Make sure obj.address exists  vue-property-precheck/no-property-pre
-  36:8   warning  Get object properties, Make sure obj.aaa.bbb exists  vue-property-precheck/no-property-pre
-  39:32  warning  Get object properties, Make sure other.list exists   vue-property-precheck/no-property-pre
+  4:10  warning  Get object properties, Make sure person.name exists               vue-property-precheck/no-property-pre
+  6:31  warning  Get object properties, Make sure $route.meta exists               vue-property-precheck/no-property-pre
+  6:70  warning  Get object properties, Make sure obj.name exists                  vue-property-precheck/no-property-pre
+  7:25  warning  Get object properties, Make sure list[0] exists                   vue-property-precheck/no-property-pre
+  7:48  warning  Get object properties, Make sure item.id exists                   vue-property-precheck/no-property-pre
+  8:10  warning  Get object properties, Make sure item.abc exists                  vue-property-precheck/no-property-pre
+  29:24  warning  Get object properties, Make sure arr[0] exists                    vue-property-precheck/no-property-pre
+  30:5   warning  Get object properties, Make sure this.name exists                 vue-property-precheck/no-property-pre
+  32:17  warning  Get object properties, Make sure obj.name exists                  vue-property-precheck/no-property-pre
+  33:7   warning  Unexpected console statement                                      no-console
+  35:8   warning  Get object properties, Make sure this.$route.query.person exists  vue-property-precheck/no-property-pre
+  38:5   warning  Get object properties, Make sure obj.name exists                  vue-property-precheck/no-property-pre
+  38:20  warning  Get object properties, Make sure obj.address exists               vue-property-precheck/no-property-pre
+  40:8   warning  Get object properties, Make sure obj.aaa.bbb exists               vue-property-precheck/no-property-pre
+  43:32  warning  Get object properties, Make sure other.list exists                vue-property-precheck/no-property-pre
 ```
