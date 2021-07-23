@@ -8,7 +8,7 @@ const expressionMap = [
   'UnaryExpression',
 ]
 
-const vueProperty = ['$route','$store']
+const vueProperty = ['$route','$store', '$refs']
 
 const reportMsgByNode = function(node, context){
   // console.log('111')
@@ -68,6 +68,9 @@ const traverseNode = function(node, context){
     let parStr = sourceCode.getText(node.parent).replace(/\s+/g,'');
     let childStr = sourceCode.getText(node.object);
     let parentStrArr = parStr.split(node.parent.operator);
+    if(childStr.indexOf('this') !== -1 && node.object.type === 'ThisExpression'){
+      return
+    }
     if(!parentStrArr.includes(childStr) && node.object.type !== 'Identifier'){
       context.report({
         node,
