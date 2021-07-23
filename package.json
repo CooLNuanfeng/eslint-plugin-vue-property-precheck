@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-vue-property-precheck",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "In the Vue project, when the multi-layer properties of the object are used in the code, eslint prompts to verify whether the object before the property exists",
   "main": "index.js",
   "scripts": {
