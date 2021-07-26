@@ -26,7 +26,7 @@ export default {
     let obj = {}
     let other = {}
     let stu = false
-    this.name = this.product || stu || arr[0].name || arr[0].name.age
+    this.name = this.product || this.$route.query.person || stu || arr[0].name || arr[0].name.age
     this.name.www =  obj.age && obj.name
     if(this.$route.query.person){
       let abc = obj.name.age

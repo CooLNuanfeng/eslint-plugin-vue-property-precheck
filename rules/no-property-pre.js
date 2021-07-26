@@ -11,7 +11,6 @@ const expressionMap = [
 const vueProperty = ['$route','$store', '$refs']
 
 const reportMsgByNode = function(node, context){
-  // console.log('111')
   let sourceCode = context.getSourceCode(node)
   if(node.parent.type === 'LogicalExpression' && node.type === 'MemberExpression'){
     let parStr = sourceCode.getText(node.parent).replace(/\s+/g,'');
@@ -29,7 +28,9 @@ const reportMsgByNode = function(node, context){
   }else if(node.type === 'MemberExpression' && node.object.type !== 'Identifier'){
     let nodeText = sourceCode.getText(node);
     if(nodeText.indexOf('this') !== -1){
-      if(node.object.object && node.object.object.property && vueProperty.includes(node.object.object.property.name)){
+      if(node.object.property && vueProperty.includes(node.object.property.name)){
+        return
+      }else if(node.object.object && node.object.object.property && vueProperty.includes(node.object.object.property.name)){
         return
       }
       if(node.object.type === 'MemberExpression'){
@@ -54,8 +55,25 @@ const reportMsgByNode = function(node, context){
     
 }
 
+
+const whenThisVueNode = function(node,context){
+  let sourceCode = context.getSourceCode(node)
+  if(node.property && vueProperty.includes(node.property.name)){
+    return
+  }else if(node.object && node.object.property && vueProperty.includes(node.object.property.name)){
+   return
+  }else{
+    context.report({
+      node,
+      messageId: 'avoidMethod',
+      data: {
+        name: `${sourceCode.getText(node)}`
+      },
+    });
+  }
+}
+
 const traverseNode = function(node, context){
-  // console.log('2222')
   if(node.parent && node.parent.type === 'AssignmentExpression'){
     if(node.parent.left.type === 'MemberExpression'){
       reportMsgByNode(node, context)
@@ -68,8 +86,15 @@ const traverseNode = function(node, context){
     let parStr = sourceCode.getText(node.parent).replace(/\s+/g,'');
     let childStr = sourceCode.getText(node.object);
     let parentStrArr = parStr.split(node.parent.operator);
-    if(childStr.indexOf('this') !== -1 && node.object.type === 'ThisExpression'){
-      return
+    if(childStr.indexOf('this') !== -1){
+      if(node.object.type === 'ThisExpression'){
+        return
+      }
+      if(node.object.type === 'MemberExpression'){
+        //针对 如 this.$router.query.xxx.xxx单独处理
+        whenThisVueNode(node.object, context)
+        return
+      }
     }
     if(!parentStrArr.includes(childStr) && node.object.type !== 'Identifier'){
       context.report({
@@ -87,7 +112,6 @@ const traverseNode = function(node, context){
 
 
 const traverseTemplateNode = function(node,context){
-  // console.log('3333')
   if(node.type === 'MemberExpression'){ // 属性
     reportMsgByNode(node, context)
   }else if(node.type === 'LogicalExpression'){ // 与逻辑
